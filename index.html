@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOM Tools</title>
+    <link rel="icon" type="image/png" href="../ENO_Tool/pictures/ATOM_logo_crop.png">
+    <style>
+        :root {
+            --cel-red: #CB333B;
+            --cel-blue: #385D7F;
+            --cel-dark-blue: #2c4a5f;
+            --cel-orange: #FE5000;
+            --cel-green: #30B700;
+            --cel-yellow: #FFD100;
+            --bg-light: #F5F7FA;
+            --text-dark: #2D3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .header-brand:hover {
+            opacity: 0.9;
+        }
+
+        .header-brand img {
+            height: 36px;
+            width: auto;
+            background-color: var(--cel-blue);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .header-brand-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cel-blue);
+        }
+
+        .back-btn {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background-color: var(--cel-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            margin-left: auto;
+        }
+
+        .back-btn:hover {
+            background-color: var(--cel-dark-blue);
+        }
+
+        .back-btn.visible {
+            display: flex;
+        }
+
+        .back-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Home view */
+        #home-view {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-text h1 {
+            font-size: 32px;
+            color: var(--cel-blue);
+            margin-bottom: 8px;
+        }
+
+        .welcome-text p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
+            gap: 30px;
+            justify-content: center;
+            max-width: 1000px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .tool-card img {
+            width: 100%;
+            max-width: 240px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tool-card span {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Tool view (iframe) */
+        #tool-view {
+            flex: 1;
+            display: none;
+        }
+
+        #tool-view.visible {
+            display: flex;
+        }
+
+        #tool-iframe {
+            width: 100%;
+            height: calc(100vh - 60px);
+            border: none;
+        }
+
+        /* Hidden state for home view */
+        #home-view.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-brand" id="header-brand">
+            <img src="../ENO_Tool/pictures/ATOM_logo.png" alt="ATOM Logo">
+            <span class="header-brand-text">ATOM Tools</span>
+        </div>
+        <button class="back-btn" id="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </button>
+    </header>
+
+    <main>
+        <div id="home-view">
+            <div class="welcome-text">
+                <h1>Welcome to ATOM Tools</h1>
+                <p>Select a tool to get started</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card" data-tool="../Status_Tool/index.html">
+                    <img src="pictures/status.png" alt="Status Tool">
+                    <span>Status Tool</span>
+                </div>
+                <div class="tool-card" data-tool="../Timeline_Tool/index.html">
+                    <img src="pictures/timeline.png" alt="Timeline Tool">
+                    <span>Timeline Tool</span>
+                </div>
+                <div class="tool-card" data-tool="../ENO_Tool/dno-demo-2.html">
+                    <img src="pictures/ENO.png" alt="ENO Sandbox">
+                    <span>ENO Sandbox</span>
+                </div>
+                <div class="tool-card" data-tool="https://atom-amc.simcel.io/">
+                    <img src="pictures/DNO.png" alt="AMC DNO">
+                    <span>AMC DNO</span>
+                </div>
+                <div class="tool-card" data-tool="../Paragon_Reports/index.html">
+                    <img src="pictures/paragon_reports.png" alt="Paragon Reports">
+                    <span>Paragon Reports</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="tool-view">
+            <iframe id="tool-iframe" title="Tool Content"></iframe>
+        </div>
+    </main>
+
+    <script>
+        const homeView = document.getElementById('home-view');
+        const toolView = document.getElementById('tool-view');
+        const toolIframe = document.getElementById('tool-iframe');
+        const backBtn = document.getElementById('back-btn');
+        const toolCards = document.querySelectorAll('.tool-card');
+
+        // Handle tool card clicks
+        toolCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const toolPath = card.getAttribute('data-tool');
+                openTool(toolPath);
+            });
+        });
+
+        // Handle back button click
+        backBtn.addEventListener('click', goHome);
+
+        // Handle header brand click (go home)
+        document.getElementById('header-brand').addEventListener('click', goHome);
+
+        function openTool(path) {
+            toolIframe.src = path;
+            homeView.classList.add('hidden');
+            toolView.classList.add('visible');
+            backBtn.classList.add('visible');
+        }
+
+        function goHome() {
+            toolIframe.src = '';
+            homeView.classList.remove('hidden');
+            toolView.classList.remove('visible');
+            backBtn.classList.remove('visible');
+        }
+    </script>
+</body>
+</html>
